@@ -12,7 +12,12 @@ public class MainService {
 			symbols.add('C');
 			symbols.print();			
 			symbols.add('Z');
-			symbols.print();			
+			symbols.print();
+			symbols.add('X',0);
+			symbols.print();
+			symbols.add('Y',5);
+			symbols.print();
+			
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
