@@ -54,9 +54,23 @@ public class MyLinkedList<Ttype> {
 			lastNode = newNode;//uzliek jauno pedejo elementu
 			howManyElements++;
 		}
-		
-		
 	}
+
+	//printesanas (apstaigasanas) funkcija
+	public void print() throws Exception{
+		if(isEmpty()) {
+			throw new Exception("Saraksta nav elementu, nav ko drukat!");
+		}
+		
+		MyNode<Ttype> currentNode = firstNode;
+		while(currentNode != null) {
+			System.out.print(currentNode.getElement() + " ");
+			currentNode = currentNode.getNextNode();
+		}
+		System.out.println();
+	}
+	
+	
 	
 
 }
