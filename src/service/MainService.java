@@ -15,7 +15,7 @@ public class MainService {
 			symbols.print();
 			symbols.add('X',0);
 			symbols.print();
-			symbols.add('Y',5);
+			symbols.add('Y',4);
 			symbols.print();
 			
 		}

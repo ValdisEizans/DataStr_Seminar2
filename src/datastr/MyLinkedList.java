@@ -80,16 +80,32 @@ public class MyLinkedList<Ttype> {
 			firstNode = newNode;
 			howManyElements++;
 		}
+		//ja pedeja pozicija pozicija
 		else if (position == howManyElements) {
 			add(inputElement);			
 		}
 		else {
+			//izveidojam jauno mezglu
+			MyNode<Ttype> newNode = new MyNode<Ttype>(inputElement);
 			
+			//ejam lidz pozicijai -1
+			MyNode<Ttype> currentNode = firstNode;//TODO no kuras puses sakt 
+			for(int i = 1; i <= position-1; i++ ) {
+				currentNode = currentNode.getNextNode();//lecam pa mezgliem
+			}
+			//veido kreisa un labas puses blokus 
+			MyNode<Ttype> leftNode = currentNode;
+			MyNode<Ttype> rightNode = leftNode.getNextNode();
+			
+			//veicam saisu nomainu
+			leftNode.setNextNode(newNode);
+			newNode.setPreviousNode(leftNode);
+			newNode.setNextNode(rightNode);
+			rightNode.setPreviousNode(newNode);
+			
+			howManyElements++;
 		}
 	}
-	
-	//ja pedeja pozicija pozicija
-	
 	
 	//printesanas (apstaigasanas) funkcija
 	public void print() throws Exception{
