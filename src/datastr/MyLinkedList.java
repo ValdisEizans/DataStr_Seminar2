@@ -1,5 +1,8 @@
 package datastr;
 
+import java.lang.annotation.ElementType;
+import java.util.ArrayList;
+
 public class MyLinkedList<Ttype> {
 	//Mainigie
 	private MyNode<Ttype> firstNode = null; //glaba infor kurs pirmais
@@ -89,9 +92,19 @@ public class MyLinkedList<Ttype> {
 			MyNode<Ttype> newNode = new MyNode<Ttype>(inputElement);
 			
 			//ejam lidz pozicijai -1
-			MyNode<Ttype> currentNode = firstNode;//TODO no kuras puses sakt 
-			for(int i = 1; i <= position-1; i++ ) {
-				currentNode = currentNode.getNextNode();//lecam pa mezgliem
+			MyNode<Ttype> currentNode = null; 
+			if(position < howManyElements/2) {//pozicija tuvak pirmajam blokam 
+				currentNode = firstNode; 
+				for(int i = 1; i <= position; i++ ) {
+					currentNode = currentNode.getNextNode();//lecam pa mezgliem
+				}
+			}
+			else {
+				currentNode = lastNode; 
+				for(int i = howManyElements; i > position; i-- ) {
+					currentNode = currentNode.getPreviousNode();//lecam pa mezgliem
+				}
+				
 			}
 			//veido kreisa un labas puses blokus 
 			MyNode<Ttype> leftNode = currentNode;
@@ -147,6 +160,72 @@ public class MyLinkedList<Ttype> {
 
 			howManyElements--;
 		}
+	}
+
+	//get by position funkcija
+	public Ttype getByPosition(int position) throws Exception{
+		if(isEmpty()) {
+			throw new Exception("Saraksts tukss, nevar dzest elementu!");
+		}
+		if(position < 0) {
+			throw new Exception("Noradita pozicija var but tikai pozitiva!");
+		}
+		if(position > howManyElements) {
+			throw new Exception("Noradita pozicija nevar but lielaka par esoso elementu skaitu!");
+		}
+		//ejam lidz pozicijai 
+		MyNode<Ttype> currentNode = null; 
+		if(position < howManyElements/2) {//pozicija tuvak pirmajam blokam 
+			currentNode = firstNode; 
+			for(int i = 1; i <= position; i++ ) {
+				currentNode = currentNode.getNextNode();//lecam pa mezgliem
+			}
+		}
+		else {
+			currentNode = lastNode; 
+			for(int i = howManyElements; i > position+1; i-- ) {
+				currentNode = currentNode.getPreviousNode();//lecam pa mezgliem
+			}
+		}
+		return currentNode.getElement();
+	}
+	
+	//search funkcija
+	public ArrayList<Integer> searchByPosition(Ttype element) throws Exception{
+		if(isEmpty()) {
+			throw new Exception("Saraksts tukss, nevar meklet elementu!");
+		}
+		if(element == null) {
+			throw new Exception("Nav noradits padotais elements!");
+		}
+
+		ArrayList<Integer> saraksts = new ArrayList<Integer>();
+		int position = 0;
+		
+		//ejam lidz pozicijai 
+			MyNode<Ttype> currentNode = firstNode; 
+			while(currentNode != null) {
+				if(currentNode.getElement().equals(element)) {
+					saraksts.add(position);
+				}
+				currentNode = currentNode.getNextNode();//lecam pa mezgliem
+				
+				position++;
+			}
+			
+		if(saraksts.isEmpty()) {
+			throw new Exception("Mekletais elements nav saraksta!");
+		}	
+		
+		return saraksts;
+	}
+	
+	//makeempty funkcija
+	public void makeEmpty() {
+		firstNode = null;
+		lastNode = null;
+		howManyElements = 0;
+		System.gc();
 	}
 	
 	//printesanas (apstaigasanas) funkcija
