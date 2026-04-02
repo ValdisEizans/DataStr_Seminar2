@@ -42,7 +42,7 @@ public class MainService {
 			Student s3 = new Student("Liga", "Egle", "986325-87452");
 			allStudents.add(s1);
 			allStudents.add(s2);
-			allStudents.add(s3,0);
+			allStudents.add(s3);
 			allStudents.print();
 			System.out.println(allStudents.getByPosition(1));
 			System.out.println(allStudents.searchByPosition(s2));//indekss, kur glabajas Liga
