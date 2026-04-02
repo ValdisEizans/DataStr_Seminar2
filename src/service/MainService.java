@@ -17,6 +17,12 @@ public class MainService {
 			symbols.print();
 			symbols.add('Y',4);
 			symbols.print();
+			symbols.remove(0);
+			symbols.print();
+			symbols.remove(4);
+			symbols.print();
+			symbols.remove(1);
+			symbols.print();
 			
 		}
 		catch (Exception e) {

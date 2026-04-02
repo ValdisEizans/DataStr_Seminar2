@@ -107,6 +107,48 @@ public class MyLinkedList<Ttype> {
 		}
 	}
 	
+	//remove by position funkcija
+	public void remove(int position) throws Exception{
+		if(isEmpty()) {
+			throw new Exception("Saraksts tukss, nevar dzest elementu!");
+		}
+		if(position < 0) {
+			throw new Exception("Noradita pozicija var but tikai pozitiva!");
+		}
+		if(position > howManyElements) {
+			throw new Exception("Noradita pozicija nevar but lielaka par esoso elementu skaitu!");
+		}
+		if(position == 0) {
+			firstNode = firstNode.getNextNode();
+			firstNode.setPreviousNode(null);
+			
+			howManyElements--;
+		}
+		//ja pedeja pozicija pozicija
+		else if (position == howManyElements-1) {
+			lastNode = lastNode.getPreviousNode();
+			lastNode.setNextNode(null);
+			
+			howManyElements--;
+		}
+		else {
+			//ejam lidz pozicijai 
+			MyNode<Ttype> currentNode = firstNode;//TODO no kuras puses sakt 
+			for(int i = 1; i <= position; i++ ) {
+				currentNode = currentNode.getNextNode();//lecam pa mezgliem
+			}
+			//veido kreisa un labas puses blokus 
+			MyNode<Ttype> leftNode = currentNode.getPreviousNode();
+			MyNode<Ttype> rightNode = currentNode.getNextNode();
+			
+			//veicam saisu nomainu
+			leftNode.setNextNode(rightNode);
+			rightNode.setPreviousNode(leftNode);
+
+			howManyElements--;
+		}
+	}
+	
 	//printesanas (apstaigasanas) funkcija
 	public void print() throws Exception{
 		if(isEmpty()) {
